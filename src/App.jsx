@@ -5,12 +5,12 @@ import useWoordle from "./hooks/use-woordle";
 styled;
 
 const App = () => {
-  const { currentGuess, addGuess } = useWoordle();
+  const { currentGuess, addGuess, removeLastGuess } = useWoordle();
 
   return (
     <StyledContent>
       <div>{currentGuess}</div>
-      <Keyboard addGuess={addGuess} />
+      <Keyboard addGuess={addGuess} removeLastGuess={removeLastGuess} />
     </StyledContent>
   );
 };
