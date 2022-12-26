@@ -22,7 +22,9 @@ const useWoordle = () => {
     };
 
     const removeLastGuess = () => {
-        console.log("clean");
+        setCurrentGuess((currentGuess) =>
+            [...currentGuess.slice(0, currentGuess.length - 1)]
+        );
     };
 
     return {
