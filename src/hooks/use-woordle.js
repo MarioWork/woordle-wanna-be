@@ -41,11 +41,11 @@ const useWoordle = () => {
             setIsGameOver(true);
         }
 
-
     };
 
     return {
         currentGuess,
+        guessHistory,
         isGameOver,
         hasWon,
         addGuess,

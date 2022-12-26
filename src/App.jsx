@@ -7,6 +7,7 @@ styled;
 const App = () => {
   const {
     currentGuess,
+    guessHistory,
     hasWon,
     isGameOver,
     addGuess,
@@ -18,6 +19,7 @@ const App = () => {
     return <p>{hasWon ? "WON" : "LOST"}</p>;
   }
 
+  //TODO DISPLAY GUESS HISTORY
   return (
     <StyledContent>
       <div>{currentGuess}</div>
