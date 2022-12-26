@@ -1,19 +1,30 @@
+import { func } from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { KeyboardKeys } from "../constants/keyboard-keys";
 
-const Keyboard = () => {
+const Keyboard = ({ addGuess }) => {
+  const onClick = ({ target: { name: key } }) => {
+    addGuess(key);
+  };
+
   return (
     <StyledKeyboard>
       {KeyboardKeys.map((row, index) => (
         <StyledKeyboardRow key={index}>
           {row.map((key) => (
-            <StyledKey key={key}>{key}</StyledKey>
+            <StyledKey key={key} name={key} onClick={onClick}>
+              {key}
+            </StyledKey>
           ))}
         </StyledKeyboardRow>
       ))}
     </StyledKeyboard>
   );
+};
+
+Keyboard.propTypes = {
+  addGuess: func.isRequired,
 };
 
 export default Keyboard;
