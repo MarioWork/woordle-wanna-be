@@ -5,12 +5,27 @@ import useWoordle from "./hooks/use-woordle";
 styled;
 
 const App = () => {
-  const { currentGuess, addGuess, removeLastGuess } = useWoordle();
+  const {
+    currentGuess,
+    hasWon,
+    isGameOver,
+    addGuess,
+    removeLastGuess,
+    submitGuess,
+  } = useWoordle();
+
+  if (isGameOver) {
+    return <p>{hasWon ? "WON" : "LOST"}</p>;
+  }
 
   return (
     <StyledContent>
       <div>{currentGuess}</div>
-      <Keyboard addGuess={addGuess} removeLastGuess={removeLastGuess} />
+      <Keyboard
+        addGuess={addGuess}
+        removeLastGuess={removeLastGuess}
+        submitGuess={submitGuess}
+      />
     </StyledContent>
   );
 };
