@@ -14,8 +14,6 @@ const App = () => {
     submitGuess,
   } = useWoordle();
 
-  console.log(guessHistory);
-
   if (isGameOver) {
     return <p>{hasWon ? "WON" : "LOST"}</p>;
   }
