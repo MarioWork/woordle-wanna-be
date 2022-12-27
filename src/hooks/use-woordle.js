@@ -19,6 +19,7 @@ const createDefaultGuessHistory = () => {
 };
 
 const useWoordle = () => {
+    const [word, setWord] = useState("lo")
     const [currentGuess, setCurrentGuess] = useState([]);
     const [guessCount, setGuessCount] = useState(0);
     const [hasWon, setHasWon] = useState(false);
@@ -74,6 +75,7 @@ const useWoordle = () => {
         });
 
         setCurrentGuess([]);
+
 
     };
 
