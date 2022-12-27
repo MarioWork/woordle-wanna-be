@@ -34,8 +34,6 @@ const useWoordle = () => {
         });
     }, [currentGuess]);
 
-
-    //Future adds letter to history instead current guess
     const addLetterToCurrentGuess = (letter) => {
         //Alternate last letter of the guess if already exists one
         if (currentGuess.length === NUMBER_OF_LETTERS) {
@@ -56,7 +54,7 @@ const useWoordle = () => {
         );
     };
 
-    //Future verify guess
+
     const submitGuess = () => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
