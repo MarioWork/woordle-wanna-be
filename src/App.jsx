@@ -44,15 +44,16 @@ export default App;
 const StyledContent = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100vh;
   width: 100vw;
   background-color: #2b3a55;
+  padding-top: 4em;
 
   main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 60%;
     align-items: center;
     background-color: #f2e5e5;
     padding: 3em;
