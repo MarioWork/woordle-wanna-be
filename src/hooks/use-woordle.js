@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { LetterSpaceType } from "../constants/letter-space-type";
 import { concatArrOfObjPropVal } from "../utils/concat-arr-obj-prop-val";
 
-const NUMBER_OF_LETTERS = 1;
-const NUMBER_OF_TRIES = 2;
+const NUMBER_OF_LETTERS = 5;
+const NUMBER_OF_TRIES = 6;
 
 const createDefaultGuessHistory = () => {
     let history = [];
@@ -22,11 +22,12 @@ const createDefaultGuessHistory = () => {
 
 const useWoordle = () => {
     const [word, setWord] = useState("L");
-    const [currentGuess, setCurrentGuess] = useState([{ letter: "", spaceType: LetterSpaceType.DEFAULT }]);
+    const [currentGuess, setCurrentGuess] = useState([]);
     const [guessCount, setGuessCount] = useState(0);
     const [hasWon, setHasWon] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
+
 
     useEffect(() => {
         setGuessHistory((history) => {
