@@ -49,6 +49,7 @@ const StyledKeyboard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-top: 2em;
 `;
 
 const StyledKeyboardRow = styled.div`

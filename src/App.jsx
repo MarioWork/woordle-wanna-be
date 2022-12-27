@@ -20,12 +20,15 @@ const App = () => {
 
   return (
     <StyledContent>
-      <GuessHistory data={guessHistory} />
-      <Keyboard
-        addLetterToCurrentGuess={addLetterToCurrentGuess}
-        removeLastLetterOfCurrentGuess={removeLastLetterOfCurrentGuess}
-        submitGuess={submitGuess}
-      />
+      <main>
+        <h1>Woordle Wanna Be</h1>
+        <GuessHistory data={guessHistory} />
+        <Keyboard
+          addLetterToCurrentGuess={addLetterToCurrentGuess}
+          removeLastLetterOfCurrentGuess={removeLastLetterOfCurrentGuess}
+          submitGuess={submitGuess}
+        />
+      </main>
     </StyledContent>
   );
 };
@@ -34,11 +37,19 @@ export default App;
 
 const StyledContent = styled.div`
   display: flex;
-  background-color: gray;
-  flex-direction: column;
-  gap: 100px;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
+  background-color: #2b3a55;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2e5e5;
+    padding: 3em;
+    border-radius: 20px;
+  }
 `;

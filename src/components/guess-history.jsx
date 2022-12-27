@@ -23,6 +23,7 @@ const StyledHistory = styled.div`
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 5px;
+  margin-top: 2em;
 `;
 
 const StyledHistoryRow = styled.div`
