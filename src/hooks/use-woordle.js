@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-const NUMBER_OF_LETTERS = 5;
-const NUMBER_OF_TRIES = 6;
+const NUMBER_OF_LETTERS = 1;
+const NUMBER_OF_TRIES = 2;
 
 const createDefaultGuessHistory = () => {
     let history = [];
@@ -33,6 +33,13 @@ const useWoordle = () => {
             return historyCopy;
         });
     }, [currentGuess]);
+
+    useEffect(() => {
+        if (guessCount === NUMBER_OF_TRIES) {
+            setIsGameOver(true);
+        }
+    }, [guessCount]);
+
 
     const addLetterToCurrentGuess = (letter) => {
         //Alternate last letter of the guess if already exists one
@@ -67,10 +74,6 @@ const useWoordle = () => {
         });
 
         setCurrentGuess([]);
-
-        if (guessCount === NUMBER_OF_TRIES) {
-            setIsGameOver(true);
-        }
 
     };
 
