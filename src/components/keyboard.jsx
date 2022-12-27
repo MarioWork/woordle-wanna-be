@@ -66,6 +66,7 @@ const StyledKey = styled.button`
   border-radius: 15px;
   padding: 1em;
   cursor: pointer;
+  font-weight: bold;
 
   &:hover {
     background: #ababab;

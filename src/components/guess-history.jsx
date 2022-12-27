@@ -40,4 +40,5 @@ const StyledHistoryCell = styled.div`
   width: 1em;
   height: 1em;
   padding: 15px;
+  font-weight: bold;
 `;

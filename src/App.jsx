@@ -51,5 +51,10 @@ const StyledContent = styled.div`
     background-color: #f2e5e5;
     padding: 3em;
     border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 20px;
+
+    h1 {
+      color: #2b3a55;
+    }
   }
 `;
