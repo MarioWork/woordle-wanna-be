@@ -6,7 +6,6 @@ styled;
 
 const App = () => {
   const {
-    currentGuess,
     guessHistory,
     hasWon,
     isGameOver,
@@ -18,8 +17,6 @@ const App = () => {
   if (isGameOver) {
     return <p>{hasWon ? "WON" : "LOST"}</p>;
   }
-
-  console.log(guessHistory);
 
   return (
     <StyledContent>
