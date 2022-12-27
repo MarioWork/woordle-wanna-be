@@ -1,4 +1,4 @@
-export const joinObjectPropertyValueInArray = (array, property) => {
+export const concatArrOfObjPropVal = (array, property) => {
     return array.reduce((finalValue, currentValue) =>
         finalValue + currentValue[property]
         , "");
