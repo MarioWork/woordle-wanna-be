@@ -19,13 +19,15 @@ const App = () => {
     return <p>{hasWon ? "WON" : "LOST"}</p>;
   }
 
+  console.log(guessHistory);
+
   return (
     <StyledContent>
       <StyledHistory>
-        {guessHistory.map((guess) => (
-          <StyledHistoryRow>
-            {guess.map((letter) => (
-              <div>{letter}</div>
+        {guessHistory.map((guess, index) => (
+          <StyledHistoryRow key={index}>
+            {guess.map((letter, index) => (
+              <div key={index}>{letter}</div>
             ))}
           </StyledHistoryRow>
         ))}
