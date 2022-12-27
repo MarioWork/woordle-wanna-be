@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import GuessHistory from "./components/guess-history";
-import Keyboard from "./components/keyboard";
+import VirtualKeyboard from "./components/virtual-keyboard";
+import PhysicalKeyboard from "./components/physical-keyboard";
 import useWoordle from "./hooks/use-woordle";
 
 const App = () => {
@@ -23,7 +24,12 @@ const App = () => {
       <main>
         <h1>Woordle Wanna Be</h1>
         <GuessHistory data={guessHistory} />
-        <Keyboard
+        <VirtualKeyboard
+          addLetterToCurrentGuess={addLetterToCurrentGuess}
+          removeLastLetterOfCurrentGuess={removeLastLetterOfCurrentGuess}
+          submitGuess={submitGuess}
+        />
+        <PhysicalKeyboard
           addLetterToCurrentGuess={addLetterToCurrentGuess}
           removeLastLetterOfCurrentGuess={removeLastLetterOfCurrentGuess}
           submitGuess={submitGuess}
