@@ -27,7 +27,7 @@ const useWoordle = () => {
 
     useEffect(() => {
         setGuessHistory((history) => {
-            const historyCopy = history;
+            const historyCopy = [...history];
             const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill("");
             historyCopy[guessCount] = [...currentGuess, ...arrayOfMissingGuessLetters];
             return historyCopy;

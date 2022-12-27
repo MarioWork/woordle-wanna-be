@@ -32,7 +32,6 @@ const App = () => {
           </StyledHistoryRow>
         ))}
       </StyledHistory>
-      <div>{currentGuess}</div>
       <Keyboard
         addLetterToCurrentGuess={addLetterToCurrentGuess}
         removeLastLetterOfCurrentGuess={removeLastLetterOfCurrentGuess}
