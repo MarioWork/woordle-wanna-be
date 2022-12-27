@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { LetterSpaceType } from "../constants/letter-space-type";
 
 const NUMBER_OF_LETTERS = 1;
 const NUMBER_OF_TRIES = 2;
-
-const LetterSpaceType = {
-    WRONG_SPOT: "wrong spot",
-    RIGHT_SPOT: "right spot",
-    NON_EXISTENT: "non-existent"
-}
 
 const createDefaultGuessHistory = () => {
     let history = [];
@@ -16,7 +11,7 @@ const createDefaultGuessHistory = () => {
         let historyGuess = [];
 
         for (let j = 0; j < NUMBER_OF_LETTERS; j++) {
-            historyGuess.push("");
+            historyGuess.push({ letter: "", spaceType: LetterSpaceType.DEFAULT });
         }
         history.push(historyGuess);
     }
@@ -36,7 +31,7 @@ const useWoordle = () => {
     useEffect(() => {
         setGuessHistory((history) => {
             const historyCopy = [...history];
-            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill("");
+            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill({ letter: "", spaceType: LetterSpaceType.DEFAULT });
             historyCopy[guessCount] = [...currentGuess, ...arrayOfMissingGuessLetters];
             return historyCopy;
         });
@@ -54,13 +49,13 @@ const useWoordle = () => {
         if (currentGuess.length === NUMBER_OF_LETTERS) {
             setCurrentGuess((currentGuess) => {
                 const currentGuessCopy = currentGuess;
-                currentGuessCopy[NUMBER_OF_LETTERS - 1] = letter;
+                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: letter, spaceType: LetterSpaceType.DEFAULT };
                 return [...currentGuessCopy];
             });
             return;
         }
 
-        setCurrentGuess((currentGuess) => [...currentGuess, letter]);
+        setCurrentGuess((currentGuess) => [...currentGuess, { letter: letter, spaceType: LetterSpaceType.DEFAULT }]);
     }
 
     const removeLastLetterOfCurrentGuess = () => {

@@ -14,6 +14,8 @@ const App = () => {
     submitGuess,
   } = useWoordle();
 
+  console.log(guessHistory);
+
   if (isGameOver) {
     return <p>{hasWon ? "WON" : "LOST"}</p>;
   }
@@ -23,7 +25,7 @@ const App = () => {
       <StyledHistory>
         {guessHistory.map((guess, index) => (
           <StyledHistoryRow key={index}>
-            {guess.map((letter, index) => (
+            {guess.map(({ letter }, index) => (
               <div key={index}>{letter}</div>
             ))}
           </StyledHistoryRow>
