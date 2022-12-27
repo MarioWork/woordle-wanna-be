@@ -1,9 +1,9 @@
 import { func } from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import { KeyboardKeys } from "../constants/keyboard-keys";
+import { VirtualKeyboardKeys } from "../constants/virtual-keyboard-keys";
 
-const Keyboard = ({
+const VirtualKeyboard = ({
   addLetterToCurrentGuess,
   removeLastLetterOfCurrentGuess,
   submitGuess,
@@ -24,7 +24,7 @@ const Keyboard = ({
 
   return (
     <StyledKeyboard>
-      {KeyboardKeys.map((row, index) => (
+      {VirtualKeyboardKeys.map((row, index) => (
         <StyledKeyboardRow key={index}>
           {row.map((key) => (
             <StyledKey key={key} name={key} onClick={onClick}>
@@ -37,13 +37,13 @@ const Keyboard = ({
   );
 };
 
-Keyboard.propTypes = {
+VirtualKeyboard.propTypes = {
   addLetterToCurrentGuess: func.isRequired,
   removeLastLetterOfCurrentGuess: func.isRequired,
   submitGuess: func.isRequired,
 };
 
-export default Keyboard;
+export default VirtualKeyboard;
 
 const StyledKeyboard = styled.div`
   display: flex;

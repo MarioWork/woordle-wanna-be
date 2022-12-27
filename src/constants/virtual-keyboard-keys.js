@@ -1,4 +1,4 @@
-export const KeyboardKeys = [
+export const VirtualKeyboardKeys = [
     [
         "Q",
         "W",
