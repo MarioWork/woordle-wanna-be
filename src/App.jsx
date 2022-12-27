@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Keyboard from "./components/keyboard";
 import useWoordle from "./hooks/use-woordle";
@@ -10,8 +10,8 @@ const App = () => {
     guessHistory,
     hasWon,
     isGameOver,
-    addGuess,
-    removeLastGuess,
+    addLetterToCurrentGuess,
+    removeLastLetterOfCurrentGuess,
     submitGuess,
   } = useWoordle();
 
@@ -19,13 +19,21 @@ const App = () => {
     return <p>{hasWon ? "WON" : "LOST"}</p>;
   }
 
-  //TODO DISPLAY GUESS HISTORY
   return (
     <StyledContent>
+      <StyledHistory>
+        {guessHistory.map((guess) => (
+          <StyledHistoryRow>
+            {guess.map((letter) => (
+              <div>{letter}</div>
+            ))}
+          </StyledHistoryRow>
+        ))}
+      </StyledHistory>
       <div>{currentGuess}</div>
       <Keyboard
-        addGuess={addGuess}
-        removeLastGuess={removeLastGuess}
+        addLetterToCurrentGuess={addLetterToCurrentGuess}
+        removeLastLetterOfCurrentGuess={removeLastLetterOfCurrentGuess}
         submitGuess={submitGuess}
       />
     </StyledContent>
@@ -42,4 +50,25 @@ const StyledContent = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
+`;
+
+const StyledHistory = styled.div`
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 5px;
+`;
+
+const StyledHistoryRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+
+  div {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    width: 1em;
+    height: 1em;
+    padding: 15px;
+  }
 `;

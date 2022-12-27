@@ -3,10 +3,14 @@ import React from "react";
 import styled from "styled-components";
 import { KeyboardKeys } from "../constants/keyboard-keys";
 
-const Keyboard = ({ addGuess, removeLastGuess, submitGuess }) => {
+const Keyboard = ({
+  addLetterToCurrentGuess,
+  removeLastLetterOfCurrentGuess,
+  submitGuess,
+}) => {
   const onClick = ({ target: { name: key } }) => {
     if (String(key).toLowerCase() === "delete") {
-      removeLastGuess();
+      removeLastLetterOfCurrentGuess();
       return;
     }
 
@@ -15,7 +19,7 @@ const Keyboard = ({ addGuess, removeLastGuess, submitGuess }) => {
       return;
     }
 
-    addGuess(key);
+    addLetterToCurrentGuess(key);
   };
 
   return (
@@ -34,8 +38,8 @@ const Keyboard = ({ addGuess, removeLastGuess, submitGuess }) => {
 };
 
 Keyboard.propTypes = {
-  addGuess: func.isRequired,
-  removeLastGuess: func.isRequired,
+  addLetterToCurrentGuess: func.isRequired,
+  removeLastLetterOfCurrentGuess: func.isRequired,
   submitGuess: func.isRequired,
 };
 
