@@ -34,6 +34,7 @@ export default App;
 
 const StyledContent = styled.div`
   display: flex;
+  background-color: gray;
   flex-direction: column;
   gap: 100px;
   justify-content: center;
