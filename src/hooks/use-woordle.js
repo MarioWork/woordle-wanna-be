@@ -19,12 +19,13 @@ const createDefaultGuessHistory = () => {
 };
 
 const useWoordle = () => {
-    const [word, setWord] = useState("lo")
+    const [word, setWord] = useState("L".split(""))
     const [currentGuess, setCurrentGuess] = useState([]);
     const [guessCount, setGuessCount] = useState(0);
     const [hasWon, setHasWon] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
+
 
     useEffect(() => {
         setGuessHistory((history) => {
@@ -66,6 +67,11 @@ const useWoordle = () => {
     const submitGuess = () => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
+        if (JSON.stringify(currentGuess) === JSON.stringify(word)) {
+            setHasWon(true);
+            setIsGameOver(true);
+        }
+
         setGuessCount(guessCount => guessCount + 1);
 
         setGuessHistory(history => {
@@ -75,8 +81,6 @@ const useWoordle = () => {
         });
 
         setCurrentGuess([]);
-
-
     };
 
     return {
