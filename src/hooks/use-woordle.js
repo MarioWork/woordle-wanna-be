@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react'
 const NUMBER_OF_LETTERS = 1;
 const NUMBER_OF_TRIES = 2;
 
+const LetterSpaceType = {
+    WRONG_SPOT: "wrong spot",
+    RIGHT_SPOT: "right spot",
+    NON_EXISTENT: "non-existent"
+}
+
 const createDefaultGuessHistory = () => {
     let history = [];
 
