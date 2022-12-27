@@ -59,10 +59,14 @@ const useWoordle = () => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
         setGuessCount(guessCount => guessCount + 1);
+
         setGuessHistory(history => {
-            const mutatedHistory = history.slice(0, history.length - 1);
-            return [currentGuess, ...mutatedHistory];
+            const historyCopy = [...history];
+            historyCopy[guessCount] = currentGuess;
+            return historyCopy;
         });
+
+        setCurrentGuess([]);
 
         if (guessCount === NUMBER_OF_TRIES) {
             setIsGameOver(true);
@@ -71,7 +75,6 @@ const useWoordle = () => {
     };
 
     return {
-        currentGuess,
         guessHistory,
         isGameOver,
         hasWon,
