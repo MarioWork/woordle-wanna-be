@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const NUMBER_OF_LETTERS = 5;
 const NUMBER_OF_TRIES = 6;
@@ -25,22 +25,29 @@ const useWoordle = () => {
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
 
+    useEffect(() => {
+        setGuessHistory((history) => {
+            const historyCopy = history;
+            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill("");
+            historyCopy[guessCount] = [...currentGuess, ...arrayOfMissingGuessLetters];
+            return historyCopy;
+        });
+    }, [currentGuess]);
 
-    const addLetterToCurrentGuess = (guess) => {
-        if (currentGuess.length < NUMBER_OF_LETTERS) {
-            setCurrentGuess((currentGuess) => [...currentGuess, guess]);
-            return;
-        }
 
+    const addLetterToCurrentGuess = (letter) => {
+        //Alternate last letter of the guess if already exists one
         if (currentGuess.length === NUMBER_OF_LETTERS) {
             setCurrentGuess((currentGuess) => {
                 const currentGuessCopy = currentGuess;
-                currentGuessCopy[NUMBER_OF_LETTERS - 1] = guess;
+                currentGuessCopy[NUMBER_OF_LETTERS - 1] = letter;
                 return [...currentGuessCopy];
             });
             return;
         }
-    };
+
+        setCurrentGuess((currentGuess) => [...currentGuess, letter]);
+    }
 
     const removeLastLetterOfCurrentGuess = () => {
         setCurrentGuess((currentGuess) =>
