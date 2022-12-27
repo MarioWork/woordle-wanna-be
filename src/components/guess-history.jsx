@@ -35,6 +35,7 @@ const StyledHistoryCell = styled.div`
   display: flex;
   justify-content: center;
   border: 1px solid black;
+  background-color: #cbcbcb;
   width: 1em;
   height: 1em;
   padding: 15px;
