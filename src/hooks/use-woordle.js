@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LetterSpaceType } from "../constants/letter-space-type";
+import { joinObjectPropertyValueInArray } from "../utils/join-object-property-value-in-array";
 
 const NUMBER_OF_LETTERS = 1;
 const NUMBER_OF_TRIES = 2;
@@ -20,8 +21,8 @@ const createDefaultGuessHistory = () => {
 };
 
 const useWoordle = () => {
-    const [word, setWord] = useState("L".split(""))
-    const [currentGuess, setCurrentGuess] = useState([]);
+    const [word, setWord] = useState("L");
+    const [currentGuess, setCurrentGuess] = useState([{ letter: "", spaceType: LetterSpaceType.DEFAULT }]);
     const [guessCount, setGuessCount] = useState(0);
     const [hasWon, setHasWon] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
@@ -42,6 +43,8 @@ const useWoordle = () => {
             setIsGameOver(true);
         }
     }, [guessCount]);
+
+
 
 
     const addLetterToCurrentGuess = (letter) => {
@@ -68,7 +71,7 @@ const useWoordle = () => {
     const submitGuess = () => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
-        if (JSON.stringify(currentGuess) === JSON.stringify(word)) {
+        if (joinObjectPropertyValueInArray(currentGuess, "letter") === word) {
             setHasWon(true);
             setIsGameOver(true);
         }
