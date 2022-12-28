@@ -8,8 +8,8 @@ const EventsType = {
 };
 
 const ActionKeys = {
-  DELETE: "BACKSPACE",
-  ENTER: "ENTER",
+  DELETE: "backspace",
+  ENTER: "enter",
 };
 
 const PhysicalKeyboard = ({
@@ -24,17 +24,16 @@ const PhysicalKeyboard = ({
   }, []);
 
   const onKeyDown = ({ key }) => {
-    const upperCaseKey = key.toUpperCase();
-
-    switch (upperCaseKey) {
+    const lowerCaseKey = key.toLowerCase();
+    switch (lowerCaseKey) {
       case ActionKeys.DELETE:
         removeLastLetterOfCurrentGuess();
         break;
       case ActionKeys.ENTER:
         submitGuess();
       default:
-        if (PhysicalLetterKeysAllowed.includes(upperCaseKey))
-          addLetterToCurrentGuess(upperCaseKey);
+        if (PhysicalLetterKeysAllowed.includes(lowerCaseKey.toUpperCase()))
+          addLetterToCurrentGuess(lowerCaseKey);
         break;
     }
   };

@@ -47,15 +47,16 @@ const useWoordle = () => {
 
 
     const addLetterToCurrentGuess = (letter) => {
+        const upperCaseLetter = letter.toUpperCase();
         setCurrentGuess((currentGuess) => {
             //Alternate last letter to the new one
             if (currentGuess.length >= NUMBER_OF_LETTERS) {
                 const currentGuessCopy = currentGuess;
-                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: letter, spaceType: LetterSpaceType.DEFAULT };
+                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: upperCaseLetter, spaceType: LetterSpaceType.DEFAULT };
                 return [...currentGuessCopy];
             }
 
-            return [...currentGuess, { letter: letter, spaceType: LetterSpaceType.DEFAULT }]
+            return [...currentGuess, { letter: upperCaseLetter, spaceType: LetterSpaceType.DEFAULT }]
         });
     }
 

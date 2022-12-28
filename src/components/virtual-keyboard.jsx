@@ -3,18 +3,25 @@ import React from "react";
 import styled from "styled-components";
 import { VirtualKeyboardKeys } from "../constants/virtual-keyboard-keys";
 
+const ActionKeys = {
+  DELETE: "delete",
+  ENTER: "enter",
+};
+
 const VirtualKeyboard = ({
   addLetterToCurrentGuess,
   removeLastLetterOfCurrentGuess,
   submitGuess,
 }) => {
   const onClick = ({ target: { name: key } }) => {
-    if (String(key).toLowerCase() === "delete") {
+    const lowerCaseKey = key.toLowerCase();
+
+    if (lowerCaseKey === ActionKeys.DELETE) {
       removeLastLetterOfCurrentGuess();
       return;
     }
 
-    if (String(key).toLowerCase() === "enter") {
+    if (lowerCaseKey === ActionKeys.ENTER) {
       submitGuess();
       return;
     }
