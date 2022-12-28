@@ -28,7 +28,6 @@ const useWoordle = () => {
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
 
-    console.log(currentGuess);
 
     useEffect(() => {
         setGuessHistory((history) => {
@@ -39,10 +38,20 @@ const useWoordle = () => {
         });
     }, [currentGuess]);
 
+
     useEffect(() => {
+        console.log(currentGuess);
+        if (currentGuess.length !== NUMBER_OF_LETTERS) return;
+
         if (guessCount === NUMBER_OF_TRIES) {
             setIsGameOver(true);
         }
+
+        if (concatArrOfObjPropVal(currentGuess, "letter") === word) {
+            setHasWon(true);
+        }
+
+        setCurrentGuess([]);
     }, [guessCount]);
 
 
@@ -68,22 +77,7 @@ const useWoordle = () => {
 
     //Fix to work with submit on physical
     const submitGuess = () => {
-        if (currentGuess.length !== NUMBER_OF_LETTERS) return;
-
-        if (concatArrOfObjPropVal(currentGuess, "letter") === word) {
-            setHasWon(true);
-            setIsGameOver(true);
-        }
-
         setGuessCount(guessCount => guessCount + 1);
-
-        setGuessHistory(history => {
-            const historyCopy = [...history];
-            historyCopy[guessCount] = currentGuess;
-            return historyCopy;
-        });
-
-        setCurrentGuess([]);
     };
 
     return {
