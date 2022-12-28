@@ -13,13 +13,12 @@ const PhysicalKeyboard = ({
   submitGuess,
 }) => {
   useEffect(() => {
-    window.addEventListener(EventsType.KEY_DOWN, onKeyDown);
+    document.addEventListener(EventsType.KEY_DOWN, onKeyDown);
 
-    return () => window.removeEventListener(EventsType.KEY_DOWN, onKeyDown);
+    return () => document.removeEventListener(EventsType.KEY_DOWN, onKeyDown);
   }, []);
 
   const onKeyDown = (e) => {
-    e.preventDefault();
     const upperCaseKey = e.key.toUpperCase();
     if (PhysicalLetterKeysAllowed.includes(upperCaseKey)) {
       addLetterToCurrentGuess(upperCaseKey);

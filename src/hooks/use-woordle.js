@@ -28,7 +28,7 @@ const useWoordle = () => {
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
 
-    console.log(currentGuess.length);
+    console.log(currentGuess);
 
     useEffect(() => {
         setGuessHistory((history) => {
@@ -48,18 +48,15 @@ const useWoordle = () => {
 
     const addLetterToCurrentGuess = (letter) => {
         setCurrentGuess((currentGuess) => {
-            if (currentGuess.length >= NUMBER_OF_LETTERS - 1) {
-                setCurrentGuess((currentGuess) => {
-                    const currentGuessCopy = currentGuess;
-                    currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: letter, spaceType: LetterSpaceType.DEFAULT };
-                    return [...currentGuessCopy];
-                });
+            //Alternate last letter to the new one
+            if (currentGuess.length >= NUMBER_OF_LETTERS) {
+                const currentGuessCopy = currentGuess;
+                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: letter, spaceType: LetterSpaceType.DEFAULT };
+                return [...currentGuessCopy];
             }
 
             return [...currentGuess, { letter: letter, spaceType: LetterSpaceType.DEFAULT }]
         });
-
-
     }
 
     const removeLastLetterOfCurrentGuess = () => {
