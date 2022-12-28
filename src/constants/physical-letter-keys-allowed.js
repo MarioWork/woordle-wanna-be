@@ -1,4 +1,4 @@
-export const InputKeyboardKeys = [
+export const PhysicalLetterKeysAllowed = [
     "Q",
     "W",
     "E",

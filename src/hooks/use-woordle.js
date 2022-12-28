@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LetterSpaceType } from "../constants/letter-space-type";
+import { LetterSpaceType } from "../constants/letter-space-type"; //Container Type
 import { concatArrOfObjPropVal } from "../utils/concat-arr-obj-prop-val";
 
 const NUMBER_OF_LETTERS = 5;
@@ -28,6 +28,7 @@ const useWoordle = () => {
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
 
+    console.log(currentGuess.length);
 
     useEffect(() => {
         setGuessHistory((history) => {
@@ -46,17 +47,19 @@ const useWoordle = () => {
 
 
     const addLetterToCurrentGuess = (letter) => {
-        //Alternate last letter of the guess if already exists one
-        if (currentGuess.length === NUMBER_OF_LETTERS) {
-            setCurrentGuess((currentGuess) => {
-                const currentGuessCopy = currentGuess;
-                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: letter, spaceType: LetterSpaceType.DEFAULT };
-                return [...currentGuessCopy];
-            });
-            return;
-        }
+        setCurrentGuess((currentGuess) => {
+            if (currentGuess.length >= NUMBER_OF_LETTERS - 1) {
+                setCurrentGuess((currentGuess) => {
+                    const currentGuessCopy = currentGuess;
+                    currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: letter, spaceType: LetterSpaceType.DEFAULT };
+                    return [...currentGuessCopy];
+                });
+            }
 
-        setCurrentGuess((currentGuess) => [...currentGuess, { letter: letter, spaceType: LetterSpaceType.DEFAULT }]);
+            return [...currentGuess, { letter: letter, spaceType: LetterSpaceType.DEFAULT }]
+        });
+
+
     }
 
     const removeLastLetterOfCurrentGuess = () => {
