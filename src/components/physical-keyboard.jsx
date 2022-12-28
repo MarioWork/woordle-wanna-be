@@ -7,6 +7,11 @@ const EventsType = {
   KEY_DOWN: "keydown",
 };
 
+const ActionKeys = {
+  DELETE: "BACKSPACE",
+  ENTER: "ENTER",
+};
+
 const PhysicalKeyboard = ({
   addLetterToCurrentGuess,
   removeLastLetterOfCurrentGuess,
@@ -18,10 +23,19 @@ const PhysicalKeyboard = ({
     return () => document.removeEventListener(EventsType.KEY_DOWN, onKeyDown);
   }, []);
 
-  const onKeyDown = (e) => {
-    const upperCaseKey = e.key.toUpperCase();
-    if (PhysicalLetterKeysAllowed.includes(upperCaseKey)) {
-      addLetterToCurrentGuess(upperCaseKey);
+  const onKeyDown = ({ key }) => {
+    const upperCaseKey = key.toUpperCase();
+
+    switch (upperCaseKey) {
+      case ActionKeys.DELETE:
+        removeLastLetterOfCurrentGuess();
+        break;
+      case ActionKeys.ENTER:
+        submitGuess();
+      default:
+        if (PhysicalLetterKeysAllowed.includes(upperCaseKey))
+          addLetterToCurrentGuess(upperCaseKey);
+        break;
     }
   };
 };
