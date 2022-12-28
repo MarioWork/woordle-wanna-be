@@ -66,7 +66,7 @@ const useWoordle = () => {
         );
     };
 
-
+    //Fix to work with submit on physical
     const submitGuess = () => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
