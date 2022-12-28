@@ -40,13 +40,13 @@ const useWoordle = () => {
 
 
     useEffect(() => {
-        console.log(currentGuess);
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
         if (guessCount === NUMBER_OF_TRIES) {
             setIsGameOver(true);
         }
 
+        //Need to add validation
         if (concatArrOfObjPropVal(currentGuess, "letter") === word) {
             setHasWon(true);
         }
