@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LetterSpaceType } from "../constants/letter-space-type"; //Container Type
+import { LetterContainerType } from "../constants/letter-container-type"; //Container Type
 import { concatArrOfObjPropVal } from "../utils/concat-arr-obj-prop-val";
 
 const NUMBER_OF_LETTERS = 5;
@@ -12,7 +12,7 @@ const createDefaultGuessHistory = () => {
         let historyGuess = [];
 
         for (let j = 0; j < NUMBER_OF_LETTERS; j++) {
-            historyGuess.push({ letter: "", spaceType: LetterSpaceType.DEFAULT });
+            historyGuess.push({ letter: "", spaceType: LetterContainerType.DEFAULT });
         }
         history.push(historyGuess);
     }
@@ -21,18 +21,18 @@ const createDefaultGuessHistory = () => {
 };
 
 const useWoordle = () => {
-    const [word, setWord] = useState("L");
+    const [word, setWord] = useState("HELLO");
     const [currentGuess, setCurrentGuess] = useState([]);
     const [guessCount, setGuessCount] = useState(0);
     const [hasWon, setHasWon] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
-
+    const [submissionCount, setSubmissionCount] = useState(0);
 
     useEffect(() => {
         setGuessHistory((history) => {
             const historyCopy = [...history];
-            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill({ letter: "", spaceType: LetterSpaceType.DEFAULT });
+            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill({ letter: "", spaceType: LetterContainerType.DEFAULT });
             historyCopy[guessCount] = [...currentGuess, ...arrayOfMissingGuessLetters];
             return historyCopy;
         });
@@ -40,19 +40,23 @@ const useWoordle = () => {
 
 
     useEffect(() => {
-        if (currentGuess.length !== NUMBER_OF_LETTERS) return;
-
         if (guessCount === NUMBER_OF_TRIES) {
             setIsGameOver(true);
         }
 
+        if (currentGuess.length !== NUMBER_OF_LETTERS) return;
+
         //Need to add validation
         if (concatArrOfObjPropVal(currentGuess, "letter") === word) {
             setHasWon(true);
+            setIsGameOver(true);
         }
 
+        setGuessCount(guessCount => guessCount + 1);
+
         setCurrentGuess([]);
-    }, [guessCount]);
+
+    }, [submissionCount]);
 
 
     const addLetterToCurrentGuess = (letter) => {
@@ -61,11 +65,11 @@ const useWoordle = () => {
             //Alternate last letter to the new one
             if (currentGuess.length >= NUMBER_OF_LETTERS) {
                 const currentGuessCopy = currentGuess;
-                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: upperCaseLetter, spaceType: LetterSpaceType.DEFAULT };
+                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: upperCaseLetter, spaceType: LetterContainerType.DEFAULT };
                 return [...currentGuessCopy];
             }
 
-            return [...currentGuess, { letter: upperCaseLetter, spaceType: LetterSpaceType.DEFAULT }]
+            return [...currentGuess, { letter: upperCaseLetter, spaceType: LetterContainerType.DEFAULT }]
         });
     }
 
@@ -77,7 +81,7 @@ const useWoordle = () => {
 
     //Fix to work with submit on physical
     const submitGuess = () => {
-        setGuessCount(guessCount => guessCount + 1);
+        setSubmissionCount(count => count + 1);
     };
 
     return {
