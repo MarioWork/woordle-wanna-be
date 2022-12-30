@@ -40,10 +40,6 @@ const useWoordle = () => {
 
 
     useEffect(() => {
-        if (guessCount === NUMBER_OF_TRIES) {
-            setIsGameOver(true);
-        }
-
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
         //Need to add validation
@@ -57,6 +53,13 @@ const useWoordle = () => {
         setCurrentGuess([]);
 
     }, [submissionCount]);
+
+
+    useEffect(() => {
+        if (guessCount === NUMBER_OF_TRIES) {
+            setIsGameOver(true);
+        }
+    }, [guessCount]);
 
 
     const addLetterToCurrentGuess = (letter) => {
