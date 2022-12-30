@@ -20,6 +20,7 @@ const createDefaultGuessHistory = () => {
     return history;
 };
 
+//TODO: In the future refactor to useReduce (Easier to read && understand)
 const useWoordle = () => {
     const [word, setWord] = useState("HELLO");
     const [currentGuess, setCurrentGuess] = useState([]);
