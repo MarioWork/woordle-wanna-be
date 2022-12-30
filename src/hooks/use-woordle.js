@@ -29,6 +29,7 @@ const useWoordle = () => {
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
     const [submissionCount, setSubmissionCount] = useState(0);
 
+    //Insert the currentGuess into the history
     useEffect(() => {
         setGuessHistory((history) => {
             const historyCopy = [...history];
@@ -38,7 +39,7 @@ const useWoordle = () => {
         });
     }, [currentGuess]);
 
-
+    //Every time the user submits guess
     useEffect(() => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
@@ -55,6 +56,7 @@ const useWoordle = () => {
     }, [submissionCount]);
 
 
+    //Verify if the game is over (Lost)
     useEffect(() => {
         if (guessCount === NUMBER_OF_TRIES) {
             setIsGameOver(true);
