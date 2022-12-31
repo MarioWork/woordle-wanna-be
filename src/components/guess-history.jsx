@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { LetterContainerColors } from "../constants/letter-container-colors";
@@ -48,3 +49,7 @@ const StyledHistoryCell = styled.div`
   padding: 15px;
   font-weight: bold;
 `;
+
+StyledHistoryCell.propTypes = {
+  background: string,
+};
