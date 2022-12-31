@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { LetterContainerColors } from "../constants/letter-container-colors";
 
 const GuessHistory = ({ data }) => {
   return (
     <StyledHistory>
       {data.map((guess, index) => (
         <StyledHistoryRow key={index}>
-          {guess.map(({ letter }, index) => (
-            <StyledHistoryCell key={index}>{letter}</StyledHistoryCell>
+          {guess.map(({ letter, containerType }, index) => (
+            <StyledHistoryCell
+              key={index}
+              background={LetterContainerColors[containerType]}
+            >
+              {letter}
+            </StyledHistoryCell>
           ))}
         </StyledHistoryRow>
       ))}
@@ -36,7 +42,7 @@ const StyledHistoryCell = styled.div`
   display: flex;
   justify-content: center;
   border: 1px solid black;
-  background-color: #cbcbcb;
+  background-color: ${({ background }) => background};
   width: 1em;
   height: 1em;
   padding: 15px;
