@@ -12,7 +12,7 @@ const createDefaultGuessHistory = () => {
         let historyGuess = [];
 
         for (let j = 0; j < NUMBER_OF_LETTERS; j++) {
-            historyGuess.push({ letter: "", spaceType: LetterContainerType.DEFAULT });
+            historyGuess.push({ letter: "", containerType: LetterContainerType.DEFAULT });
         }
         history.push(historyGuess);
     }
@@ -34,7 +34,7 @@ const useWoordle = () => {
     useEffect(() => {
         setGuessHistory((history) => {
             const historyCopy = [...history];
-            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill({ letter: "", spaceType: LetterContainerType.DEFAULT });
+            const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill({ letter: "", containerType: LetterContainerType.DEFAULT });
             historyCopy[guessCount] = [...currentGuess, ...arrayOfMissingGuessLetters];
             return historyCopy;
         });
@@ -71,11 +71,11 @@ const useWoordle = () => {
             //Alternate last letter to the new one
             if (currentGuess.length >= NUMBER_OF_LETTERS) {
                 const currentGuessCopy = currentGuess;
-                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: upperCaseLetter, spaceType: LetterContainerType.DEFAULT };
+                currentGuessCopy[NUMBER_OF_LETTERS - 1] = { letter: upperCaseLetter, containerType: LetterContainerType.DEFAULT };
                 return [...currentGuessCopy];
             }
 
-            return [...currentGuess, { letter: upperCaseLetter, spaceType: LetterContainerType.DEFAULT }]
+            return [...currentGuess, { letter: upperCaseLetter, containerType: LetterContainerType.DEFAULT }]
         });
     }
 
