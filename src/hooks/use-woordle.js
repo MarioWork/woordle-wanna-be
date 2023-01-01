@@ -30,10 +30,11 @@ const useWoordle = () => {
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
     const [submissionCount, setSubmissionCount] = useState(0);
 
-    console.log(guessHistory);
 
     //Insert the currentGuess into the history
     useEffect(() => {
+        if (isGameOver) return;
+
         setGuessHistory((history) => {
             const historyCopy = [...history];
             const arrayOfMissingGuessLetters = Array(NUMBER_OF_LETTERS - currentGuess.length).fill({ letter: "", containerType: LetterContainerType.DEFAULT });
@@ -46,11 +47,7 @@ const useWoordle = () => {
     useEffect(() => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
-        //Need to add validation
-        if (verifyAndUpdateSubmittedGuess()) {
-            setHasWon(true);
-            setIsGameOver(true);
-        }
+        verifyAndUpdateSubmittedGuess();
 
         setGuessCount(guessCount => guessCount + 1);
 
@@ -66,15 +63,33 @@ const useWoordle = () => {
         }
     }, [guessCount]);
 
+    //Verify if has won end the game
+    useEffect(() => {
+        if (hasWon) {
+            setIsGameOver(true);
+        }
+    }, [hasWon])
+
+
     const verifyAndUpdateSubmittedGuess = () => {
         const wordArray = word.split('');
-        setCurrentGuess((currentGuess) =>
-            currentGuess.map((guess, index) => {
-                guess.containerType = LetterContainerType.RIGHT_SPOT;
-            })
-        );
 
-        return true;
+        setCurrentGuess((currentGuessVal) =>
+            currentGuessVal.map((guess) => {
+                if (wordArray[index] == guess.letter) {
+                    hasWon = true;
+                    return { ...guess, containerType: LetterContainerType.RIGHT_SPOT };
+                }
+                if (wordArray.includes(guess.letter)) {
+                    hasWon = false;
+                    return { ...guess, containerType: LetterContainerType.WRONG_SPOT };
+                }
+
+                hasWon = false;
+                return { ...guess, containerType: LetterContainerType.NON_EXISTENT };
+            })
+
+        );
     }
 
     const addLetterToCurrentGuess = (letter) => {
