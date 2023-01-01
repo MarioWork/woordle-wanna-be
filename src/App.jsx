@@ -15,12 +15,11 @@ const App = () => {
     submitGuess,
   } = useWoordle();
 
-  if (isGameOver) {
-    return <p>{hasWon ? "WON" : "LOST"}</p>;
-  }
-
   return (
     <StyledContent>
+      {isGameOver && (
+        <p style={{ color: "white" }}>{hasWon ? "WON" : "LOST"}</p>
+      )}
       <main>
         <h1>Woordle Wanna Be</h1>
         <GuessHistory data={guessHistory} />
