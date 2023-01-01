@@ -30,6 +30,8 @@ const useWoordle = () => {
     const [guessHistory, setGuessHistory] = useState(createDefaultGuessHistory());
     const [submissionCount, setSubmissionCount] = useState(0);
 
+    console.log(guessHistory);
+
     //Insert the currentGuess into the history
     useEffect(() => {
         setGuessHistory((history) => {
@@ -45,7 +47,7 @@ const useWoordle = () => {
         if (currentGuess.length !== NUMBER_OF_LETTERS) return;
 
         //Need to add validation
-        if (concatArrOfObjPropVal(currentGuess, "letter") === word) {
+        if (verifyAndUpdateSubmittedGuess()) {
             setHasWon(true);
             setIsGameOver(true);
         }
@@ -64,6 +66,16 @@ const useWoordle = () => {
         }
     }, [guessCount]);
 
+    const verifyAndUpdateSubmittedGuess = () => {
+        const wordArray = word.split('');
+        setCurrentGuess((currentGuess) =>
+            currentGuess.map((guess, index) => {
+                guess.containerType = LetterContainerType.RIGHT_SPOT;
+            })
+        );
+
+        return true;
+    }
 
     const addLetterToCurrentGuess = (letter) => {
         const upperCaseLetter = letter.toUpperCase();
