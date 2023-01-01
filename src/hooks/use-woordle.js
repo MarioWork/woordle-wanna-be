@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LetterContainerType } from "../constants/letter-container-type"; //Container Type
+import { LetterContainerType } from "../constants/letter-container-type";
 import { concatArrOfObjPropVal } from "../utils/concat-arr-obj-prop-val";
 
 const NUMBER_OF_LETTERS = 5;
