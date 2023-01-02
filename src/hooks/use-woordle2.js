@@ -99,7 +99,7 @@ const useWoordle2 = () => {
     }
 
 
-    const [{ guessHistory, hasWon, isGameOver, currentGuess }, dispatch] = useReducer(reducer, initialState);
+    const [{ guessHistory, hasWon, isGameOver }, dispatch] = useReducer(reducer, initialState);
 
 
     return {
