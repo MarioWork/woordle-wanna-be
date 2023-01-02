@@ -42,14 +42,12 @@ const useWoordle2 = () => {
 
         //Alternate last letter to the new one
         if (currentGuess.length >= NUMBER_OF_LETTERS) {
-            const currentGuessCopy = currentGuess;
-
-            currentGuessCopy[NUMBER_OF_LETTERS - 1] = {
+            currentGuess[NUMBER_OF_LETTERS - 1] = { //might give bug
                 letter: upperCaseLetter,
                 containerType: LetterContainerType.DEFAULT
             };
 
-            return { ...state, currentGuess: currentGuessCopy };
+            return { ...state, currentGuess: currentGuess };
         }
 
         return {
@@ -99,7 +97,6 @@ const useWoordle2 = () => {
                 return submitGuess(state);
         }
     }
-
 
 
     const [{ guessHistory, hasWon, isGameOver }, dispatch] = useReducer(reducer, initialState);
