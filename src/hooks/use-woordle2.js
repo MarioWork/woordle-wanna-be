@@ -103,7 +103,7 @@ const useWoordle2 = () => {
         return { ...verifiedState, currentGuess: [], guessCount: verifiedState.guessCount + 1 };
     }
 
-    const addHistory = (state) => {
+    const addToHistory = (state) => {
         const { currentGuess, guessHistory, guessCount } = state;
 
         const arrayOfMissingGuessLetters =
@@ -129,10 +129,10 @@ const useWoordle2 = () => {
         switch (action) {
             case Actions.ADD_LETTER:
                 const updatedState = addLetterCurrentGuess(state, payload);
-                return addHistory(updatedState);
+                return addToHistory(updatedState);
             case Actions.REMOVE_LETTER:
                 const updatedState2 = removeLastLetterCurrentGuess(state);
-                return addHistory(updatedState2);
+                return addToHistory(updatedState2);
             case Actions.SUBMIT_GUESS:
                 return submitGuess(state);
         }
