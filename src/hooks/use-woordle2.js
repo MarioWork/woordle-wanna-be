@@ -75,24 +75,43 @@ const useWoordle2 = () => {
     }
 
     const verifyGuess = (state) => {
-        const { guessHistory, guessCount, } = state;
-        const guessHistoryCopy = { ...guessHistory };
+        const { guessHistory, guessCount, word } = state;
+        const guessHistoryCopy = [...guessHistory];
+        const wordArray = word.toUpperCase().split("");
 
+        let rightSpotLetterCounter = 0;
         guessHistoryCopy[guessCount] =
             guessHistory[guessCount]
-                .map(guess => ({
-                    ...guess,
-                    containerType: LetterContainerType.RIGHT_SPOT
-                }));
+                .map((guess, index) => {
 
-        return { ...state, guessHistory: guessHistoryCopy };
+                    if (wordArray[index] === guess.letter) {
+                        rightSpotLetterCounter++;
+                        return { ...guess, containerType: LetterContainerType.RIGHT_SPOT };
+                    }
+
+                    if (wordArray.includes(guess.letter)) {
+                        return { ...guess, containerType: LetterContainerType.WRONG_SPOT };
+                    }
+
+                    return { ...guess, containerType: LetterContainerType.NON_EXISTENT };
+
+                });
+
+        const hasWon = rightSpotLetterCounter == wordArray.length;
+
+        return {
+            ...state,
+            guessHistory: guessHistoryCopy,
+            hasWon: hasWon,
+            isGameOver: hasWon
+        };
     }
 
     const submitGuess = (state) => {
 
         if (state.currentGuess.length !== NUMBER_OF_LETTERS) return state;
 
-        let stateCopy = { ...state };
+        const stateCopy = { ...state };
 
         if (stateCopy.guessCount + 1 >= NUMBER_OF_TRIES)
             stateCopy.isGameOver = true;
@@ -100,7 +119,10 @@ const useWoordle2 = () => {
         //verify guess
         const verifiedState = verifyGuess(stateCopy);
 
-        return { ...verifiedState, currentGuess: [], guessCount: verifiedState.guessCount + 1 };
+        const nextGuessCount = verifiedState.guessCount + 1;
+        const isGameOver = nextGuessCount >= NUMBER_OF_TRIES || verifiedState.isGameOver;
+
+        return { ...verifiedState, currentGuess: [], guessCount: nextGuessCount, isGameOver: isGameOver };
     }
 
     const addToHistory = (state) => {
@@ -124,7 +146,7 @@ const useWoordle2 = () => {
 
     const reducer = (state, { action, payload }) => {
 
-        if (state.guessCount >= NUMBER_OF_TRIES) return state;
+        if (state.isGameOver) return state;
 
         switch (action) {
             case Actions.ADD_LETTER:
