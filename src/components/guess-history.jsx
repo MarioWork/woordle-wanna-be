@@ -22,6 +22,7 @@ const GuessHistory = ({ data }) => {
   );
 };
 
+//TODO: Fix proptypes
 GuessHistory.propTypes = {};
 
 export default GuessHistory;
