@@ -74,19 +74,33 @@ const useWoordle2 = () => {
         };
     }
 
+    const verifyGuess = (state) => {
+        const { guessHistory, guessCount, } = state;
+        const guessHistoryCopy = { ...guessHistory };
+
+        guessHistoryCopy[guessCount] =
+            guessHistory[guessCount]
+                .map(guess => ({
+                    ...guess,
+                    containerType: LetterContainerType.RIGHT_SPOT
+                }));
+
+        return { ...state, guessHistory: guessHistoryCopy };
+    }
+
     const submitGuess = (state) => {
 
         if (state.currentGuess.length !== NUMBER_OF_LETTERS) return state;
 
-        let updatedState = { ...state, guessCount: state.guessCount + 1 };
+        let stateCopy = { ...state };
 
-        if (updatedState.guessCount >= NUMBER_OF_TRIES)
-            updatedState = { ...updatedState, isGameOver: true };
+        if (stateCopy.guessCount + 1 >= NUMBER_OF_TRIES)
+            stateCopy.isGameOver = true;
 
         //verify guess
+        const verifiedState = verifyGuess(stateCopy);
 
-
-        return { ...updatedState, currentGuess: [] };
+        return { ...verifiedState, currentGuess: [], guessCount: verifiedState.guessCount + 1 };
     }
 
     const addHistory = (state) => {
