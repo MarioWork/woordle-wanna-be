@@ -4,7 +4,7 @@
 set -e
 
 # If it is a redeploy uncomment the line bellow
-#rm -rf dist
+rm -rf dist
 
 # build
 npm run build
