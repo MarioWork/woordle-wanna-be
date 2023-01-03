@@ -120,7 +120,7 @@ const useWoordle2 = () => {
         const verifiedState = verifyGuess(stateCopy);
 
         const nextGuessCount = verifiedState.guessCount + 1;
-        const isGameOver = nextGuessCount >= NUMBER_OF_TRIES || verifiedState.isGameOver;
+        const isGameOver = nextGuessCount >= NUMBER_OF_TRIES || verifiedState.hasWon;
 
         return { ...verifiedState, currentGuess: [], guessCount: nextGuessCount, isGameOver: isGameOver };
     }
