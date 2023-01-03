@@ -116,7 +116,6 @@ const useWoordle = () => {
         if (stateCopy.guessCount + 1 >= NUMBER_OF_TRIES)
             stateCopy.isGameOver = true;
 
-        //verify guess
         const verifiedState = verifyGuess(stateCopy);
 
         const nextGuessCount = verifiedState.guessCount + 1;
