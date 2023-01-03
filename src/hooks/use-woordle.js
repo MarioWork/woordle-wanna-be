@@ -20,7 +20,7 @@ const createDefaultGuessHistory = () => {
 };
 
 const initialState = {
-    word: "HELLO",
+    word: "CARDS",
     currentGuess: [],
     guessCount: 0,
     hasWon: false,
@@ -34,7 +34,7 @@ const Actions = {
     SUBMIT_GUESS: "submit-guess"
 }
 
-const useWoordle2 = () => {
+const useWoordle = () => {
 
     const addLetterCurrentGuess = (state, letter) => {
         const { currentGuess } = state;
@@ -160,9 +160,7 @@ const useWoordle2 = () => {
         }
     }
 
-
     const [{ guessHistory, hasWon, isGameOver }, dispatch] = useReducer(reducer, initialState);
-
 
     return {
         guessHistory,
@@ -177,5 +175,5 @@ const useWoordle2 = () => {
     }
 };
 
-export default useWoordle2;
+export default useWoordle;
 
