@@ -36,7 +36,7 @@ const Actions = {
 
 const useWoordle2 = () => {
 
-    const addLetter = (state, letter) => {
+    const addLetterCurrentGuess = (state, letter) => {
         const { currentGuess } = state;
         const upperCaseLetter = letter.toUpperCase();
 
@@ -53,16 +53,17 @@ const useWoordle2 = () => {
         return {
             ...state,
             currentGuess:
-                [...currentGuess,
-                {
-                    letter: upperCaseLetter,
-                    containerType: LetterContainerType.DEFAULT
-                }
+                [
+                    ...currentGuess,
+                    {
+                        letter: upperCaseLetter,
+                        containerType: LetterContainerType.DEFAULT
+                    }
                 ]
         }
     }
 
-    const removeLastLetterOfCurrentGuess = (state) => {
+    const removeLastLetterCurrentGuess = (state) => {
         const { currentGuess } = state;
         return {
             ...state,
@@ -74,25 +75,50 @@ const useWoordle2 = () => {
     }
 
     const submitGuess = (state) => {
-        const { currentGuess, guessCount } = state;
 
-        if (currentGuess.length !== NUMBER_OF_LETTERS) return state;
+        if (state.currentGuess.length !== NUMBER_OF_LETTERS) return state;
+
+        let updatedState = { ...state, guessCount: state.guessCount + 1 };
+
+        if (updatedState.guessCount >= NUMBER_OF_TRIES)
+            updatedState = { ...updatedState, isGameOver: true };
 
         //verify guess
 
-        return {
-            ...state,
-            guessCount: guessCount + 1,
-            currentGuess: []
-        };
+
+        return { ...updatedState, currentGuess: [] };
+    }
+
+    const addHistory = (state) => {
+        const { currentGuess, guessHistory, guessCount } = state;
+
+        const arrayOfMissingGuessLetters =
+            Array(NUMBER_OF_LETTERS - currentGuess.length)
+                .fill({
+                    letter: "",
+                    containerType: LetterContainerType.DEFAULT
+                });
+
+        guessHistory[guessCount] =
+            [
+                ...currentGuess,
+                ...arrayOfMissingGuessLetters
+            ];
+
+        return { ...state, guessHistory: guessHistory }
     }
 
     const reducer = (state, { action, payload }) => {
+
+        if (state.guessCount >= NUMBER_OF_TRIES) return state;
+
         switch (action) {
             case Actions.ADD_LETTER:
-                return addLetter(state, payload);
+                const updatedState = addLetterCurrentGuess(state, payload);
+                return addHistory(updatedState);
             case Actions.REMOVE_LETTER:
-                return removeLastLetterOfCurrentGuess(state);
+                const updatedState2 = removeLastLetterCurrentGuess(state);
+                return addHistory(updatedState2);
             case Actions.SUBMIT_GUESS:
                 return submitGuess(state);
         }
