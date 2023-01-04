@@ -158,12 +158,13 @@ const useWoordle = () => {
         }
     }
 
-    const [{ guessHistory, hasWon, isGameOver }, dispatch] = useReducer(reducer, initialState);
+    const [{ guessHistory, hasWon, isGameOver, word }, dispatch] = useReducer(reducer, initialState);
 
     return {
         guessHistory,
         hasWon,
         isGameOver,
+        word,
         addLetterToCurrentGuess: (letter) =>
             dispatch({ action: Actions.ADD_LETTER, payload: letter }),
         removeLastLetterOfCurrentGuess: () =>
