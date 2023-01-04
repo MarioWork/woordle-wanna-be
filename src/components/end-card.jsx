@@ -46,7 +46,7 @@ const Modal = styled.div`
     align-items: center;
     margin-top: 4em;
     width: 500px;
-    height: 120px;
+    height: 140px;
     background-color: #f2e5e5;
     padding: 3em;
     border-radius: 20px;
@@ -60,14 +60,13 @@ const Modal = styled.div`
       margin-top: 1em;
 
       button {
+        width: 100px;
         background: #cbcbcb;
-        min-width: 3em;
-        min-height: 3em;
         border: none;
         border-radius: 15px;
         padding: 1em;
+        font-weight: 600;
         cursor: pointer;
-        font-weight: bold;
 
         &:hover {
           background: #ababab;
