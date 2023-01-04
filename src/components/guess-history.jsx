@@ -1,4 +1,4 @@
-import { string } from "prop-types";
+import { arrayOf, shape, string } from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { LetterContainerColors } from "../constants/letter-container-colors";
@@ -22,8 +22,16 @@ const GuessHistory = ({ data }) => {
   );
 };
 
-//TODO: Fix proptypes
-GuessHistory.propTypes = {};
+GuessHistory.propTypes = {
+  data: arrayOf(
+    arrayOf(
+      shape({
+        letter: string,
+        containerType: string,
+      }).isRequired
+    ).isRequired
+  ).isRequired,
+};
 
 export default GuessHistory;
 
