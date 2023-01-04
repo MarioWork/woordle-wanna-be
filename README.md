@@ -1,6 +1,6 @@
 # Woordle Wanna Be
 
-This project consists of an attempt of cloning the popular game [Woordle](https://www.nytimes.com/games/wordle/index.html), it is a great challenge for those who are trying to learn React.js. The game does not have all the complexity of the original game, in this case it only has one word.
+This project consists of an attempt of cloning the popular game [Wordle](https://www.nytimes.com/games/wordle/index.html), it is a great challenge for those who are trying to learn React.js. The game does not have all the complexity of the original game, in this case it only has one word.
 
 ## Word
 
