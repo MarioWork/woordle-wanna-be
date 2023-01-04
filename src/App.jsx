@@ -1,15 +1,18 @@
-import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import GuessHistory from "./components/guess-history";
 import VirtualKeyboard from "./components/virtual-keyboard";
 import PhysicalKeyboard from "./components/physical-keyboard";
 import useWoordle from "./hooks/use-woordle";
+import EndCard from "./components/end-card";
 
 const App = () => {
+  const [showModal, setShowModal] = useState(true);
   const {
     guessHistory,
     hasWon,
     isGameOver,
+    word,
     addLetterToCurrentGuess,
     removeLastLetterOfCurrentGuess,
     submitGuess,
@@ -17,8 +20,12 @@ const App = () => {
 
   return (
     <StyledContent>
-      {isGameOver && (
-        <p style={{ color: "white" }}>{hasWon ? "WON" : "LOST"}</p>
+      {isGameOver && showModal && (
+        <EndCard
+          hasWon={hasWon}
+          word={word}
+          onClose={() => setShowModal(false)}
+        />
       )}
       <main>
         <h1>Woordle Wanna Be</h1>
@@ -46,12 +53,13 @@ const StyledContent = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #2b3a55;
-  padding-top: 4em;
 
   main {
+    margin-top: 4em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 0;
     height: 60%;
     align-items: center;
     background-color: #f2e5e5;
