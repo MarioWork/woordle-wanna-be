@@ -82,18 +82,17 @@ const useWoordle = () => {
         let rightSpotLetterCounter = 0;
         guessHistoryCopy[guessCount] =
             guessHistory[guessCount]
-                .map((guess, index) => {
-
-                    if (wordArray[index] === guess.letter) {
+                .map((letterObj, index) => {
+                    if (wordArray[index] === letterObj.letter) {
                         rightSpotLetterCounter++;
-                        return { ...guess, containerType: LetterContainerType.RIGHT_SPOT };
+                        return { ...letterObj, containerType: LetterContainerType.RIGHT_SPOT };
                     }
 
-                    if (wordArray.includes(guess.letter)) {
-                        return { ...guess, containerType: LetterContainerType.WRONG_SPOT };
+                    if (wordArray.includes(letterObj.letter)) {
+                        return { ...letterObj, containerType: LetterContainerType.WRONG_SPOT };
                     }
 
-                    return { ...guess, containerType: LetterContainerType.NON_EXISTENT };
+                    return { ...letterObj, containerType: LetterContainerType.NON_EXISTENT };
 
                 });
 
