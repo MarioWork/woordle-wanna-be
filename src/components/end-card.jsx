@@ -1,5 +1,5 @@
 import React from "react";
-import { bool } from "prop-types";
+import { bool, string, func } from "prop-types";
 import styled from "styled-components";
 
 const EndCard = ({ hasWon, onClose, word }) => {
@@ -27,6 +27,8 @@ const EndCard = ({ hasWon, onClose, word }) => {
 
 EndCard.propTypes = {
   hasWon: bool.isRequired,
+  onClose: func.isRequired,
+  word: string.isRequired,
 };
 
 export default EndCard;
